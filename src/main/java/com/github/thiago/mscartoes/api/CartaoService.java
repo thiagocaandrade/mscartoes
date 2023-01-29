@@ -5,6 +5,7 @@ import com.github.thiago.mscartoes.infra.repository.CartaoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -12,14 +13,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CartaoService {
 
-    private final CartaoRepository cartaoRepository;
+    private final CartaoRepository repository;
 
+    @Transactional
     public Cartao save(Cartao cartao){
-        return cartaoRepository.save(cartao);
+        return repository.save(cartao);
     }
 
-    public List<Cartao> getCartoesRendaMaiorMenorIgual(Long renda){
-        BigDecimal rendaBigDecimal = BigDecimal.valueOf(renda);
-        return cartaoRepository.findByRendaLessThanEqual(rendaBigDecimal);
+    public List<Cartao> getCartoesRendaMenorIgual(Long renda){
+        var rendaBigDecimal = BigDecimal.valueOf(renda);
+        return repository.findByRendaLessThanEqual(rendaBigDecimal);
     }
 }

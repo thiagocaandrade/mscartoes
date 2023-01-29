@@ -17,12 +17,10 @@ public class CartoesPorClienteResponse {
     private BigDecimal limiteLiberado;
 
     public static CartoesPorClienteResponse fromModel(ClienteCartao model){
-
         return new CartoesPorClienteResponse(
                 model.getCartao().getNome(),
                 model.getCartao().getBandeira().toString(),
-                model.getLimite());
-
+                model.getLimite()
+        );
     }
-
 }
